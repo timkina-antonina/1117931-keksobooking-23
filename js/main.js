@@ -5,7 +5,7 @@ const getRandomIntegerInclusive = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  return 'Минимальное значение диапазона должно быть меньше максимального. Или диапазон не содержит целых значений.';
+  return "Минимальное значение диапазона должно быть меньше максимального. Или диапазон не содержит целых значений.";
 };
 
 const getRandomFloatInclusive = function (min, max, decimalPlaces) {
@@ -14,7 +14,7 @@ const getRandomFloatInclusive = function (min, max, decimalPlaces) {
     return randomFloatInclusive.toFixed(decimalPlaces);
   }
 
-  return 'Минимальное значение диапазона должно быть меньше максимального.';
+  return "Минимальное значение диапазона должно быть меньше максимального.";
 };
 
 getRandomIntegerInclusive(1.4, 2.5);
