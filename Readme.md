@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [Антонина Тимкина](https://up.htmlacademy.ru/javascript/23/user/1117931).
-* Наставник: `Неизвестно`.
+- Студент: [Антонина Тимкина](https://up.htmlacademy.ru/javascript/23/user/1117931).
+- Наставник: [Денис Байдаров](https://htmlacademy.ru/profile/id7956).
 
 ---
 
