@@ -9,7 +9,6 @@ const getRandomIntegerInclusive = function (min, max) {
 };
 
 const getRandomFloatInclusive = function (min, max, decimalPlaces) {
-	
   if (min < max) {
     const randomFloatInclusive = Math.random() * (max - min) + min;
     return randomFloatInclusive.toFixed(decimalPlaces);
