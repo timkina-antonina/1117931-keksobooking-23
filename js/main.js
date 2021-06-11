@@ -57,9 +57,7 @@ const MAX_ROOMS_COUNT = 20;
 const MAX_USERS_COUNT = 1000;
 const ADS_COUNT = 10;
 
-const getRandomArrayElement = (elements) => {
-  return elements[getRandomIntegerInclusive(0, elements.length - 1)];
-};
+const getRandomArrayElement = (elements) => {elements[getRandomIntegerInclusive(0, elements.length - 1)]};
 
 const randoArrayValues = (lengthArray, array) => {
   const newArray = [];
@@ -78,7 +76,14 @@ const createAuthor = () => {
     randomNumberAvatar = '0' + randomNumberAvatar.toString();
   }
   return {
-    avatar: 'img/avatars/user' + randomNumberAvatar + '.png',
+    avatar: 'img/avatars/user ${randomNumberAvatar} .png',
+  };
+};
+
+const createLocation = () => {
+  return {
+    lat: getRandomFloatInclusive(35.65, 35.7, 5),
+    lng: getRandomFloatInclusive(139.7, 139.8, 5),
   };
 };
 
@@ -99,14 +104,7 @@ const createOffer = () => {
   };
 };
 
-const createLocation = () => {
-  return {
-    lat: getRandomFloatInclusive(35.65, 35.7, 5),
-    lng: getRandomFloatInclusive(139.7, 139.8, 5),
-  };
-};
-
-const ads = new Array(ADS_COUNT).fill(null).map(() => {
+const announcement = new Array(ADS_COUNT).fill(null).map(() => {
   return {
     author: createAuthor(),
     offer: createOffer(),
