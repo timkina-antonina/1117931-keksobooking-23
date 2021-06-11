@@ -75,25 +75,25 @@ const randoArrayValues = (lengthArray, array) => {
 const createAuthor = () => {
   let randomNumberAvatar = getRandomIntegerInclusive(1, 10);
   if (randomNumberAvatar < 10) {
-    randomNumberAvatar = '0${randomNumberAvatar.toString()}';
+    randomNumberAvatar = `0${randomNumberAvatar.toString()}`;
   }
   return {
-    avatar: 'img/avatars/user${randomNumberAvatar}.png',
+    avatar: `img/avatars/user${randomNumberAvatar}.png`,
   };
 };
 
-const createLocation = () => {
-  return {
+const createLocation = () => (
+  {
     lat: getRandomFloatInclusive(35.65, 35.7, 5),
     lng: getRandomFloatInclusive(139.7, 139.8, 5),
   };
-};
+);
 
 const createOffer = () => {
   const location = createLocation();
   return {
     title: 'Предложение',
-    address: location.lat + ', ' + location.lng,
+    address: `${location.lat},  ${location.lng}`,
     price: getRandomIntegerInclusive(1, MAX_PRICE),
     type: getRandomArrayElement(TYPE),
     rooms: getRandomIntegerInclusive(1, MAX_ROOMS_COUNT),
@@ -106,12 +106,12 @@ const createOffer = () => {
   };
 };
 
-const announcement = new Array(ADS_COUNT).fill(null).map(() => {
-  return {
+const announcement = new Array(ADS_COUNT).fill(null).map(() => (
+  {
     author: createAuthor(),
     offer: createOffer(),
     location: createLocation(),
   };
-});
+));
 
 announcement();
