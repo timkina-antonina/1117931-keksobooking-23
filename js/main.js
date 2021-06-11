@@ -86,7 +86,7 @@ const createLocation = () => (
   {
     lat: getRandomFloatInclusive(35.65, 35.7, 5),
     lng: getRandomFloatInclusive(139.7, 139.8, 5),
-  };
+  }
 );
 
 const createOffer = () => {
@@ -111,7 +111,7 @@ const announcement = new Array(ADS_COUNT).fill(null).map(() => (
     author: createAuthor(),
     offer: createOffer(),
     location: createLocation(),
-  };
+  }
 ));
 
 announcement();
