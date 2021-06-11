@@ -57,14 +57,16 @@ const MAX_ROOMS_COUNT = 20;
 const MAX_USERS_COUNT = 1000;
 const ADS_COUNT = 10;
 
-const getRandomArrayElement = (elements) => {return elements[getRandomIntegerInclusive(0, elements.length - 1)]};
+const getRandomArrayElement = (elements) => {
+  return elements[getRandomIntegerInclusive(0, elements.length - 1)];
+};
 
 const randoArrayValues = (lengthArray, array) => {
   const newArray = [];
   while (newArray.length < lengthArray) {
     const arrayIndex = getRandomIntegerInclusive(0, array.length - 1);
     if (newArray.includes(array[arrayIndex]) === false) {
-       newArray.push(array[arrayIndex]);
+      newArray.push(array[arrayIndex]);
     }
   }
   return newArray;
@@ -84,7 +86,7 @@ const createOffer = () => {
   const location = createLocation();
   return {
     title: 'Предложение',
-    address: location.lat + ", " + location.lng,
+    address: location.lat + ', ' + location.lng,
     price: getRandomIntegerInclusive(1, MAX_PRICE),
     type: getRandomArrayElement(TYPE),
     rooms: getRandomIntegerInclusive(1, MAX_ROOMS_COUNT),
@@ -96,7 +98,6 @@ const createOffer = () => {
     photos: randoArrayValues(getRandomIntegerInclusive(1, PHOTOS.length - 1), PHOTOS),
   };
 };
-
 
 const createLocation = () => {
   return {
@@ -112,5 +113,3 @@ const ads = new Array(ADS_COUNT).fill(null).map(() => {
     location: createLocation(),
   };
 });
-
-console.log(ads);
