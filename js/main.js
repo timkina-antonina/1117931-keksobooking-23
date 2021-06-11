@@ -96,8 +96,8 @@ const createLocation = () => (
   }
 );
 
-const createOffer = (location) => {
-  return {
+const createOffer = (location) => (
+  {
     title: 'Предложение',
     address: `${location.lat},  ${location.lng}`,
     price: getRandomIntegerInclusive(1, MAX_PRICE),
@@ -110,7 +110,7 @@ const createOffer = (location) => {
     description: 'Описание помещения',
     photos: randomArrayValues(getRandomIntegerInclusive(1, PHOTOS.length - 1), PHOTOS),
   };
-};
+);
 
 const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map(() => {
   const location = createLocation();
@@ -118,7 +118,7 @@ const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map(() => {
     author: createAuthor(),
     offer: createOffer(location),
     location: location,
-  }
+  };
 });
 
 announcement();
