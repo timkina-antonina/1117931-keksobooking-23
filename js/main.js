@@ -109,7 +109,7 @@ const createOffer = (location) => (
     features: randomArrayValues(getRandomIntegerInclusive(1, FEATURES.length - 1), FEATURES),
     description: 'Описание помещения',
     photos: randomArrayValues(getRandomIntegerInclusive(1, PHOTOS.length - 1), PHOTOS),
-  };
+  }
 );
 
 const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map(() => {
