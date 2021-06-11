@@ -55,13 +55,14 @@ const PHOTOS = [
 const MAX_PRICE = 1000000;
 const MAX_ROOMS_COUNT = 20;
 const MAX_USERS_COUNT = 1000;
-const ADS_COUNT = 10;
+const ANNOUNCEMENT_COUNT = 10;
+const IMAGES_COUNT = 10;
 
 const getRandomArrayElement = (elements) => {
   elements[getRandomIntegerInclusive(0, elements.length - 1)];
 };
 
-const randoArrayValues = (lengthArray, array) => {
+const randomArrayValues = (lengthArray, array) => {
   const newArray = [];
   while (newArray.length < lengthArray) {
     const arrayIndex = getRandomIntegerInclusive(0, array.length - 1);
@@ -73,7 +74,7 @@ const randoArrayValues = (lengthArray, array) => {
 };
 
 const createAuthor = () => {
-  let randomNumberAvatar = getRandomIntegerInclusive(1, 10);
+  let randomNumberAvatar = getRandomIntegerInclusive(1, IMAGES_COUNT);
   if (randomNumberAvatar < 10) {
     randomNumberAvatar = `0${randomNumberAvatar.toString()}`;
   }
@@ -82,15 +83,20 @@ const createAuthor = () => {
   };
 };
 
+const LATITUDE_START = 35.65;
+const LATITUDE_END = 35.7;
+const LONGITUDE_START = 139.7;
+const LONGITUDE_END = 139.8;
+const DECIMAL_PLACES = 5;
+
 const createLocation = () => (
   {
-    lat: getRandomFloatInclusive(35.65, 35.7, 5),
-    lng: getRandomFloatInclusive(139.7, 139.8, 5),
+    lat: getRandomFloatInclusive(LATITUDE_START, LATITUDE_END, DECIMAL_PLACES),
+    lng: getRandomFloatInclusive(LONGITUDE_START, LONGITUDE_END, DECIMAL_PLACES),
   }
 );
 
-const createOffer = () => {
-  const location = createLocation();
+const createOffer = (location) => {
   return {
     title: 'Предложение',
     address: `${location.lat},  ${location.lng}`,
@@ -100,18 +106,19 @@ const createOffer = () => {
     guests: getRandomIntegerInclusive(1, MAX_USERS_COUNT),
     checkin: getRandomArrayElement(CHECKIN),
     checkout: getRandomArrayElement(CHECKOUT),
-    features: randoArrayValues(getRandomIntegerInclusive(1, FEATURES.length - 1), FEATURES),
+    features: randomArrayValues(getRandomIntegerInclusive(1, FEATURES.length - 1), FEATURES),
     description: 'Описание помещения',
-    photos: randoArrayValues(getRandomIntegerInclusive(1, PHOTOS.length - 1), PHOTOS),
+    photos: randomArrayValues(getRandomIntegerInclusive(1, PHOTOS.length - 1), PHOTOS),
   };
 };
 
-const announcement = new Array(ADS_COUNT).fill(null).map(() => (
-  {
+const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map(() => {
+  const location = createLocation();
+  return {
     author: createAuthor(),
-    offer: createOffer(),
-    location: createLocation(),
+    offer: createOffer(location),
+    location: location,
   }
-));
+});
 
 announcement();
