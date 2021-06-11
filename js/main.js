@@ -57,7 +57,9 @@ const MAX_ROOMS_COUNT = 20;
 const MAX_USERS_COUNT = 1000;
 const ADS_COUNT = 10;
 
-const getRandomArrayElement = (elements) => {elements[getRandomIntegerInclusive(0, elements.length - 1)]};
+const getRandomArrayElement = (elements) => {
+  elements[getRandomIntegerInclusive(0, elements.length - 1)];
+};
 
 const randoArrayValues = (lengthArray, array) => {
   const newArray = [];
@@ -89,9 +91,10 @@ const createLocation = () => {
 
 const createOffer = () => {
   const location = createLocation();
+  const addres = location.lat + ', ' + location.lng;
   return {
     title: 'Предложение',
-    address: location.lat + ', ' + location.lng,
+    address: addres,
     price: getRandomIntegerInclusive(1, MAX_PRICE),
     type: getRandomArrayElement(TYPE),
     rooms: getRandomIntegerInclusive(1, MAX_ROOMS_COUNT),
