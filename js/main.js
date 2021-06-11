@@ -59,14 +59,14 @@ const ADS_COUNT = 10;
 
 const getRandomArrayElement = (elements) => {return elements[getRandomIntegerInclusive(0, elements.length - 1)]};
 
-const randoArrayValues = (n, array) => {
+const randoArrayValues = (lengthArray, array) => {
   const newArray = [];
-  while (newArray.length < n) {
-    let arrayIndex = getRandomIntegerInclusive(0, array.length - 1);
-    if (newArray.includes(array[arrayIndex]) == false) {
+  while (newArray.length < lengthArray) {
+    const arrayIndex = getRandomIntegerInclusive(0, array.length - 1);
+    if (newArray.includes(array[arrayIndex]) === false) {
        newArray.push(array[arrayIndex]);
-    };
-  };
+    }
+  }
   return newArray;
 };
 
@@ -74,7 +74,7 @@ const createAuthor = () => {
   let randomNumberAvatar = getRandomIntegerInclusive(1, 10);
   if (randomNumberAvatar < 10) {
     randomNumberAvatar = '0' + randomNumberAvatar.toString();
-  };
+  }
   return {
     avatar: 'img/avatars/user' + randomNumberAvatar + '.png',
   };
@@ -110,7 +110,7 @@ const ads = new Array(ADS_COUNT).fill(null).map(() => {
     author: createAuthor(),
     offer: createOffer(),
     location: createLocation(),
-  }
+  };
 });
 
 console.log(ads);
