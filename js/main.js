@@ -56,7 +56,6 @@ const MAX_PRICE = 1000000;
 const MAX_ROOMS_COUNT = 20;
 const MAX_USERS_COUNT = 1000;
 const ANNOUNCEMENT_COUNT = 10;
-const IMAGES_COUNT = 10;
 
 const getRandomArrayElement = (elements) => elements[getRandomIntegerInclusive(0, elements.length - 1)];
 
