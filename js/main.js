@@ -103,7 +103,7 @@ const createOffer = (location) => (
 const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map((it, num) => {
   const location = createLocation();
   num = num + 1;
-  let avatar = num < 10 ? `0${num.toString()}` : num;
+  const avatar = num < 10 ? `0${num.toString()}` : num;
   return {
     author: `img/avatars/user${avatar.toString()}.png`,
     offer: createOffer(location),
