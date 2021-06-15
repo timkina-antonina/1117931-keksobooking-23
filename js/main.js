@@ -72,16 +72,6 @@ const randomArrayValues = (lengthArray, array) => {
   return newArray;
 };
 
-const createAuthor = () => {
-  let randomNumberAvatar = getRandomIntegerInclusive(1, IMAGES_COUNT);
-  if (randomNumberAvatar < 10) {
-    randomNumberAvatar = `0${randomNumberAvatar.toString()}`;
-  }
-  return {
-    avatar: `img/avatars/user${randomNumberAvatar}.png`,
-  };
-};
-
 const LATITUDE_START = 35.65;
 const LATITUDE_END = 35.7;
 const LONGITUDE_START = 139.7;
@@ -111,10 +101,19 @@ const createOffer = (location) => (
   }
 );
 
+let numberAvatar = 1;
+
 const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map(() => {
   const location = createLocation();
+  let avatar = numberAvatar;
+  if (numberAvatar < 10) {
+    avatar = `img/avatars/user0${numberAvatar.toString()}.png`;
+  } else {
+    avatar = `img/avatars/user${numberAvatar.toString()}.png`;
+  }
+  numberAvatar = numberAvatar + 1;
   return {
-    author: createAuthor(),
+    author: avatar,
     offer: createOffer(location),
     location: location,
   };
