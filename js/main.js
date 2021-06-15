@@ -101,23 +101,16 @@ const createOffer = (location) => (
   }
 );
 
-let numberAvatar = 1;
-
-const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map(() => {
+const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map((it, num) => {
   const location = createLocation();
-  let avatar = numberAvatar;
-  if (numberAvatar < 10) {
-    avatar = `img/avatars/user0${numberAvatar.toString()}.png`;
-  } else {
-    avatar = `img/avatars/user${numberAvatar.toString()}.png`;
-  }
-  numberAvatar = numberAvatar + 1;
+  num = num + 1;
+  let avatar = num < 10 ? `0${num.toString()}` : num;
   return {
-    author: avatar,
+    author: `img/avatars/user${avatar.toString()}.png`,
     offer: createOffer(location),
     location: location,
   };
 });
 
-announcement();
-// console.log(announcement);
+// announcement();
+console.log(announcement);
