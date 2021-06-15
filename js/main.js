@@ -112,5 +112,5 @@ const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map((it, num) => {
   };
 });
 
-// announcement();
-console.log(announcement);
+announcement();
+// console.log(announcement);
