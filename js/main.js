@@ -58,9 +58,8 @@ const MAX_USERS_COUNT = 1000;
 const ANNOUNCEMENT_COUNT = 10;
 const IMAGES_COUNT = 10;
 
-const getRandomArrayElement = (elements) => {
-  elements[getRandomIntegerInclusive(0, elements.length - 1)];
-};
+const getRandomArrayElement = (elements) => elements[getRandomIntegerInclusive(0, elements.length - 1)];
+
 
 const randomArrayValues = (lengthArray, array) => {
   const newArray = [];
@@ -122,3 +121,4 @@ const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map(() => {
 });
 
 announcement();
+// console.log(announcement);
