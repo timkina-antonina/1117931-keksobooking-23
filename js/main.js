@@ -1,5 +1,5 @@
 import {announcement} from './object.js';
 import './map.js';
 
-// announcement();
+announcement;
 // console.log(announcement);
