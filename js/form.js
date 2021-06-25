@@ -1,0 +1,11 @@
+const makeFormDisabled  = () => (
+  {
+
+  }
+);
+
+const makeFormActive  = () => (
+  {
+
+  }
+);
