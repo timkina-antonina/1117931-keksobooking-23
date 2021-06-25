@@ -12,7 +12,7 @@ const map = document.querySelector('#map-canvas');
 const similarAnnouncement = announcement;
 const similarAnnouncementFragment = document.createDocumentFragment();
 
-similarAnnouncement.forEach(({author, offer, location}) => {
+similarAnnouncement.forEach(({author, offer}) => {
   const cardElement = templateCard.cloneNode(true);
 
   // popup__title
@@ -57,7 +57,7 @@ similarAnnouncement.forEach(({author, offer, location}) => {
     cardElement.querySelector('.popup__type').remove();
   }
 
-   // popup__text--capacity
+  // popup__text--capacity
   if (offer.guests) {
     cardElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   } else {
@@ -75,12 +75,12 @@ similarAnnouncement.forEach(({author, offer, location}) => {
   if (offer.features) {
     const popupFeatureElements = cardElement.querySelector('.popup__features');
     const livePopupFeatureElements = popupFeatureElements.children;
-      livePopupFeatureElements[5].remove();
-      livePopupFeatureElements[4].remove();
-      livePopupFeatureElements[3].remove();
-      livePopupFeatureElements[2].remove();
-      livePopupFeatureElements[1].remove();
-      livePopupFeatureElements[0].remove();
+    livePopupFeatureElements[5].remove();
+    livePopupFeatureElements[4].remove();
+    livePopupFeatureElements[3].remove();
+    livePopupFeatureElements[2].remove();
+    livePopupFeatureElements[1].remove();
+    livePopupFeatureElements[0].remove();
     const popupFeatureFragment = document.createDocumentFragment();
     offer.features.forEach((currentValue, i) => {
       const newElement = document.createElement('li');

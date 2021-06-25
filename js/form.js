@@ -1,11 +1,11 @@
-const makeFormDisabled  = () => (
-  {
+// const makeFormDisabled  = () => (
+//   {
 
-  }
-);
+//   }
+// );
 
-const makeFormActive  = () => (
-  {
+// const makeFormActive  = () => (
+//   {
 
-  }
-);
+//   }
+// );
