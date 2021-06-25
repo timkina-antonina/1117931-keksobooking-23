@@ -7,12 +7,28 @@ const templateCard = document.querySelector('#card')
 
 // находим куда вставлять
 const map = document.querySelector('#map-canvas');
-
-//получаем массив данных
 const similarAnnouncement = announcement;
-const similarAnnouncementFragment = document.createDocumentFragment();
+// const similarAnnouncementFragment = document.createDocumentFragment();
+let typeHousing = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель'
+};
+let printTypeHousing = function (type) {
+  return typeHousing[type];
+};
 
-similarAnnouncement.forEach(({author, offer}) => {
+// similarAnnouncement.forEach(({author, offer}) => {
+  // const cardElement = drawCard(offer, author);
+  // similarAnnouncementFragment.appendChild(cardElement);
+// });
+
+// map.appendChild(similarAnnouncementFragment);
+map.appendChild(drawCard(similarAnnouncement[0].offer, similarAnnouncement[0].author));
+
+function drawCard(offer, author) {
   const cardElement = templateCard.cloneNode(true);
 
   // popup__title
@@ -38,21 +54,7 @@ similarAnnouncement.forEach(({author, offer}) => {
 
   // popup__type
   if (offer.type) {
-    if (offer.type === 'flat') {
-      cardElement.querySelector('.popup__type').textContent = 'Квартира';
-    }
-    if (offer.type === 'bungalow') {
-      cardElement.querySelector('.popup__type').textContent = 'Бунгало';
-    }
-    if (offer.type === 'house') {
-      cardElement.querySelector('.popup__type').textContent = 'Дом';
-    }
-    if (offer.type === 'palace') {
-      cardElement.querySelector('.popup__type').textContent = 'Дворец';
-    }
-    if (offer.type === 'hotel') {
-      cardElement.querySelector('.popup__type').textContent = 'Отель';
-    }
+    cardElement.querySelector('.popup__type').textContent = printTypeHousing(offer.type);
   } else {
     cardElement.querySelector('.popup__type').remove();
   }
@@ -75,12 +77,9 @@ similarAnnouncement.forEach(({author, offer}) => {
   if (offer.features) {
     const popupFeatureElements = cardElement.querySelector('.popup__features');
     const livePopupFeatureElements = popupFeatureElements.children;
-    livePopupFeatureElements[5].remove();
-    livePopupFeatureElements[4].remove();
-    livePopupFeatureElements[3].remove();
-    livePopupFeatureElements[2].remove();
-    livePopupFeatureElements[1].remove();
-    livePopupFeatureElements[0].remove();
+    for (let i = livePopupFeatureElements.length - 1; i >= 0; i--) {
+      livePopupFeatureElements[i].remove();
+    }
     const popupFeatureFragment = document.createDocumentFragment();
     offer.features.forEach((currentValue, i) => {
       const newElement = document.createElement('li');
@@ -121,8 +120,12 @@ similarAnnouncement.forEach(({author, offer}) => {
   } else {
     cardElement.querySelector('.popup__avatar').remove();
   }
+  return cardElement;
+}
+// console.log(similarAnnouncementFragment);
+// createCard(1);
 
-  similarAnnouncementFragment.appendChild(cardElement);
-});
 
-map.appendChild(similarAnnouncementFragment);
+// const createCard = function (number) {
+//   map.appendChild(similarAnnouncementFragment[number]);
+// };
