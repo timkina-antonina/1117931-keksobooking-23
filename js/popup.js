@@ -9,24 +9,16 @@ const templateCard = document.querySelector('#card')
 const map = document.querySelector('#map-canvas');
 const similarAnnouncement = announcement;
 // const similarAnnouncementFragment = document.createDocumentFragment();
-let typeHousing = {
+const typeHousing = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дворец',
-  hotel: 'Отель'
+  hotel: 'Отель',
 };
-let printTypeHousing = function (type) {
+const printTypeHousing = function (type) {
   return typeHousing[type];
 };
-
-// similarAnnouncement.forEach(({author, offer}) => {
-  // const cardElement = drawCard(offer, author);
-  // similarAnnouncementFragment.appendChild(cardElement);
-// });
-
-// map.appendChild(similarAnnouncementFragment);
-map.appendChild(drawCard(similarAnnouncement[0].offer, similarAnnouncement[0].author));
 
 function drawCard(offer, author) {
   const cardElement = templateCard.cloneNode(true);
@@ -122,10 +114,11 @@ function drawCard(offer, author) {
   }
   return cardElement;
 }
-// console.log(similarAnnouncementFragment);
-// createCard(1);
 
+// similarAnnouncement.forEach(({author, offer}) => {
+// const cardElement = drawCard(offer, author);
+// similarAnnouncementFragment.appendChild(cardElement);
+// });
 
-// const createCard = function (number) {
-//   map.appendChild(similarAnnouncementFragment[number]);
-// };
+// map.appendChild(similarAnnouncementFragment);
+map.appendChild(drawCard(similarAnnouncement[0].offer, similarAnnouncement[0].author));
