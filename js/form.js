@@ -17,7 +17,7 @@ function makeFormDisabled() {
   mapFilter.forEach((element, i) => {
     mapFilter[i].disabled = true;
   });
-};
+}
 
 function makeFormActive() {
   adForm.classList.remove('ad-form--disabled');
@@ -31,7 +31,7 @@ function makeFormActive() {
   mapFilter.forEach((element, i) => {
     mapFilter[i].disabled = false;
   });
-};
+}
 
 makeFormDisabled();
 makeFormActive();
