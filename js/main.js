@@ -1,5 +1,3 @@
-import {announcement} from './object.js';
+import './popup.js';
+import './form.js';
 import './map.js';
-
-announcement;
-// console.log(announcement);
