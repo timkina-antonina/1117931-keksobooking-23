@@ -61,7 +61,7 @@ priceInput.addEventListener('input', () => {
   const valuePrice =  priceInput.value;
 
   if (valuePrice < minPriceValue) {
-    priceInput.setCustomValidity(`Цена должна быть не менее ${ min_price_value }`);
+    priceInput.setCustomValidity(`Цена должна быть не менее ${ minPriceValue }`);
   } else if (valuePrice > MAX_PRICE_VALUE) {
     priceInput.setCustomValidity(`Цена должна быть не более ${ MAX_PRICE_VALUE }`);
   } else {
@@ -77,7 +77,6 @@ const buttonFormSubmit = document.querySelector('.ad-form__submit');
 const roomNumberSelect = document.querySelector('#room_number');
 const capacitySelect = document.querySelector('#capacity');
 buttonFormSubmit.addEventListener('click', () => {
-  console.log('fff');
   switch (roomNumberSelect.value) {
     case '1':
       if (capacitySelect.value !== '1') {
