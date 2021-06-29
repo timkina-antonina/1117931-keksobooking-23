@@ -54,13 +54,13 @@ titleInput.addEventListener('input', () => {
 // Валидация поля "Цена за ночь"
 
 const MAX_PRICE_VALUE = 1000000;
-let min_price_value = MIN_PRICE_VALUE_FLAT;
+let minPriceValue = MIN_PRICE_VALUE_FLAT;
 const priceInput = document.querySelector('#price');
 
 priceInput.addEventListener('input', () => {
   const valuePrice =  priceInput.value;
 
-  if (valuePrice < min_price_value) {
+  if (valuePrice < minPriceValue) {
     priceInput.setCustomValidity(`Цена должна быть не менее ${ min_price_value }`);
   } else if (valuePrice > MAX_PRICE_VALUE) {
     priceInput.setCustomValidity(`Цена должна быть не более ${ MAX_PRICE_VALUE }`);
@@ -80,15 +80,13 @@ buttonFormSubmit.addEventListener('click', () => {
   console.log('fff');
   switch (roomNumberSelect.value) {
     case '1':
-      console.log('комнат 1 шт');
       if (capacitySelect.value !== '1') {
-         capacitySelect.setCustomValidity('Количество гостей не может быть больше 1');
+        capacitySelect.setCustomValidity('Количество гостей не может быть больше 1');
       } else {
         capacitySelect.setCustomValidity('');
       }
       break;
     case '2':
-      console.log('комнат 2 шт');
       if (capacitySelect.value !== '1') {
         if (capacitySelect.value !== '2') {
           capacitySelect.setCustomValidity('Количество гостей не может быть больше 2');
@@ -100,7 +98,6 @@ buttonFormSubmit.addEventListener('click', () => {
       }
       break;
     case '3':
-      console.log('комнат 3 шт');
       if (capacitySelect.value === '0') {
         capacitySelect.setCustomValidity('Количество гостей не может быть больше 3');
       } else {
@@ -108,7 +105,6 @@ buttonFormSubmit.addEventListener('click', () => {
       }
       break;
     case '100':
-      console.log('комнат 100 шт');
       if (capacitySelect.value !== '0') {
         capacitySelect.setCustomValidity('Количество гостей не может быть меньше 3');
       } else {
@@ -125,19 +121,19 @@ const typeSelect = document.querySelector('#type');
 typeSelect.addEventListener('change', () => {
   switch (typeSelect.value) {
     case 'bungalow':
-      min_price_value = MIN_PRICE_VALUE_BUNGALOW;
+      minPriceValue = MIN_PRICE_VALUE_BUNGALOW;
       break;
     case 'flat':
-      min_price_value = MIN_PRICE_VALUE_FLAT;
+      minPriceValue = MIN_PRICE_VALUE_FLAT;
       break;
     case 'hotel':
-      min_price_value = MIN_PRICE_VALUE_HOTEL;
+      minPriceValue = MIN_PRICE_VALUE_HOTEL;
       break;
     case 'house':
-      min_price_value = MIN_PRICE_VALUE_HOUSE;
+      minPriceValue = MIN_PRICE_VALUE_HOUSE;
       break;
     case 'palace':
-      min_price_value = MIN_PRICE_VALUE_PALACE;
+      minPriceValue = MIN_PRICE_VALUE_PALACE;
       break;
   }
 });
