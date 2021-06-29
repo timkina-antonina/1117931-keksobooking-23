@@ -1,8 +1,6 @@
-const MIN_PRICE_VALUE_BUNGALOW = 0;
-const MIN_PRICE_VALUE_FLAT = 1000;
-const MIN_PRICE_VALUE_HOTEL = 3000;
-const MIN_PRICE_VALUE_HOUSE = 5000;
-const MIN_PRICE_VALUE_PALACE = 10000;
+const MAX_PRICE_VALUE = 1000000;
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
 
 const adForm = document.querySelector('.ad-form');
 const adFormHeader = adForm.querySelector('.ad-form-header');
@@ -10,6 +8,14 @@ const adFormElement = adForm.querySelectorAll('.ad-form__element');
 const filtersForm = document.querySelector('.map__filters');
 const mapFeatures = filtersForm.querySelector('.map__features');
 const mapFilter = filtersForm.querySelectorAll('.map__filter');
+
+const minPriceTypeHousing = {
+  flat: 1000,
+  bungalow: 0,
+  house: 5000,
+  palace: 10000,
+  hotel: 3000,
+};
 
 function makeFormState(isDisabled) {
   if (isDisabled) {
@@ -33,8 +39,6 @@ makeFormState(false);
 
 // Валидация поля "Заголовок объявления"
 
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
 const titleInput = document.querySelector('#title');
 
 titleInput.addEventListener('input', () => {
@@ -53,8 +57,8 @@ titleInput.addEventListener('input', () => {
 
 // Валидация поля "Цена за ночь"
 
-const MAX_PRICE_VALUE = 1000000;
-let minPriceValue = MIN_PRICE_VALUE_FLAT;
+
+let minPriceValue = minPriceTypeHousing.flat;
 const priceInput = document.querySelector('#price');
 
 priceInput.addEventListener('input', () => {
@@ -77,40 +81,20 @@ const buttonFormSubmit = document.querySelector('.ad-form__submit');
 const roomNumberSelect = document.querySelector('#room_number');
 const capacitySelect = document.querySelector('#capacity');
 buttonFormSubmit.addEventListener('click', () => {
-  switch (roomNumberSelect.value) {
-    case '1':
-      if (capacitySelect.value !== '1') {
-        capacitySelect.setCustomValidity('Количество гостей не может быть больше 1');
-      } else {
-        capacitySelect.setCustomValidity('');
-      }
-      break;
-    case '2':
-      if (capacitySelect.value !== '1') {
-        if (capacitySelect.value !== '2') {
-          capacitySelect.setCustomValidity('Количество гостей не может быть больше 2');
-        } else {
-          capacitySelect.setCustomValidity('');
-        }
-      } else {
-        capacitySelect.setCustomValidity('');
-      }
-      break;
-    case '3':
-      if (capacitySelect.value === '0') {
-        capacitySelect.setCustomValidity('Количество гостей не может быть больше 3');
-      } else {
-        capacitySelect.setCustomValidity('');
-      }
-      break;
-    case '100':
-      if (capacitySelect.value !== '0') {
-        capacitySelect.setCustomValidity('Количество гостей не может быть меньше 3');
-      } else {
-        capacitySelect.setCustomValidity('');
-      }
-      break;
+  if (parseInt(roomNumberSelect.value) < 100) {
+    if (parseInt(capacitySelect.value) > parseInt(roomNumberSelect.value) || capacitySelect.value === '0') {
+      capacitySelect.setCustomValidity('Количество гостей не должно превышать количество комнат');
+    } else {
+      capacitySelect.setCustomValidity('');
+    }
+  } else {
+    if (capacitySelect.value !== '0') {
+      capacitySelect.setCustomValidity('100 комнат не для гостей');
+   } else {
+    capacitySelect.setCustomValidity('');
+   }
   }
+
   capacitySelect.reportValidity();
 });
 
@@ -120,19 +104,19 @@ const typeSelect = document.querySelector('#type');
 typeSelect.addEventListener('change', () => {
   switch (typeSelect.value) {
     case 'bungalow':
-      minPriceValue = MIN_PRICE_VALUE_BUNGALOW;
+      minPriceValue = minPriceTypeHousing.bungalow;
       break;
     case 'flat':
-      minPriceValue = MIN_PRICE_VALUE_FLAT;
+      minPriceValue = minPriceTypeHousing.flat;
       break;
     case 'hotel':
-      minPriceValue = MIN_PRICE_VALUE_HOTEL;
+      minPriceValue = minPriceTypeHousing.hotel;
       break;
     case 'house':
-      minPriceValue = MIN_PRICE_VALUE_HOUSE;
+      minPriceValue = minPriceTypeHousing.house;
       break;
     case 'palace':
-      minPriceValue = MIN_PRICE_VALUE_PALACE;
+      minPriceValue = minPriceTypeHousing.palace;
       break;
   }
 });
