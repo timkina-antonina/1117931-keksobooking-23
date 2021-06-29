@@ -81,8 +81,8 @@ const buttonFormSubmit = document.querySelector('.ad-form__submit');
 const roomNumberSelect = document.querySelector('#room_number');
 const capacitySelect = document.querySelector('#capacity');
 buttonFormSubmit.addEventListener('click', () => {
-  if (parseInt(roomNumberSelect.value) < 100) {
-    if (parseInt(capacitySelect.value) > parseInt(roomNumberSelect.value) || capacitySelect.value === '0') {
+  if (Number(roomNumberSelect.value) < 100) {
+    if (Number(capacitySelect.value) > Number(roomNumberSelect.value) || capacitySelect.value === '0') {
       capacitySelect.setCustomValidity('Количество гостей не должно превышать количество комнат');
     } else {
       capacitySelect.setCustomValidity('');
@@ -90,9 +90,9 @@ buttonFormSubmit.addEventListener('click', () => {
   } else {
     if (capacitySelect.value !== '0') {
       capacitySelect.setCustomValidity('100 комнат не для гостей');
-   } else {
-    capacitySelect.setCustomValidity('');
-   }
+    } else {
+      capacitySelect.setCustomValidity('');
+    }
   }
 
   capacitySelect.reportValidity();
