@@ -57,7 +57,6 @@ titleInput.addEventListener('input', () => {
 
 // Валидация поля "Цена за ночь"
 
-
 let minPriceValue = minPriceTypeHousing.flat;
 const priceInput = document.querySelector('#price');
 
@@ -75,7 +74,7 @@ priceInput.addEventListener('input', () => {
   priceInput.reportValidity();
 });
 
-// Валидация полей "Количество комнат" и "Количество мест"
+// Валидация полей «Количество комнат» и «Количество мест»
 
 const buttonFormSubmit = document.querySelector('.ad-form__submit');
 const roomNumberSelect = document.querySelector('#room_number');
