@@ -1,9 +1,21 @@
+const MAX_PRICE_VALUE = 1000000;
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+
 const adForm = document.querySelector('.ad-form');
 const adFormHeader = adForm.querySelector('.ad-form-header');
 const adFormElement = adForm.querySelectorAll('.ad-form__element');
 const filtersForm = document.querySelector('.map__filters');
 const mapFeatures = filtersForm.querySelector('.map__features');
 const mapFilter = filtersForm.querySelectorAll('.map__filter');
+
+const minPriceTypeHousing = {
+  flat: 1000,
+  bungalow: 0,
+  house: 5000,
+  palace: 10000,
+  hotel: 3000,
+};
 
 function makeFormState(isDisabled) {
   if (isDisabled) {
@@ -24,3 +36,85 @@ function makeFormState(isDisabled) {
 }
 
 makeFormState(false);
+
+// Валидация поля "Заголовок объявления"
+
+const titleInput = document.querySelector('#title');
+
+titleInput.addEventListener('input', () => {
+  const valueLength =  titleInput.value.length;
+
+  if (valueLength < MIN_TITLE_LENGTH) {
+    titleInput.setCustomValidity(`Напишите ещё ${  MIN_TITLE_LENGTH - valueLength } символов`);
+  } else if (valueLength > MAX_TITLE_LENGTH) {
+    titleInput.setCustomValidity(`Удалите лишние ${  valueLength - MAX_TITLE_LENGTH } символов`);
+  } else {
+    titleInput.setCustomValidity('');
+  }
+
+  titleInput.reportValidity();
+});
+
+// Валидация поля "Цена за ночь"
+
+
+let minPriceValue = minPriceTypeHousing.flat;
+const priceInput = document.querySelector('#price');
+
+priceInput.addEventListener('input', () => {
+  const valuePrice =  priceInput.value;
+
+  if (valuePrice < minPriceValue) {
+    priceInput.setCustomValidity(`Цена должна быть не менее ${ minPriceValue }`);
+  } else if (valuePrice > MAX_PRICE_VALUE) {
+    priceInput.setCustomValidity(`Цена должна быть не более ${ MAX_PRICE_VALUE }`);
+  } else {
+    priceInput.setCustomValidity('');
+  }
+
+  priceInput.reportValidity();
+});
+
+// Валидация полей "Количество комнат" и "Количество мест"
+
+const buttonFormSubmit = document.querySelector('.ad-form__submit');
+const roomNumberSelect = document.querySelector('#room_number');
+const capacitySelect = document.querySelector('#capacity');
+buttonFormSubmit.addEventListener('click', () => {
+  capacitySelect.setCustomValidity('');
+  if (Number(roomNumberSelect.value) < 100) {
+    if (Number(capacitySelect.value) > Number(roomNumberSelect.value) || capacitySelect.value === '0') {
+      capacitySelect.setCustomValidity('Количество гостей не должно превышать количество комнат');
+    }
+  } else {
+    if (capacitySelect.value !== '0') {
+      capacitySelect.setCustomValidity('100 комнат не для гостей');
+    }
+  }
+
+  capacitySelect.reportValidity();
+});
+
+// Валидация поля «Тип жилья»
+
+const typeSelect = document.querySelector('#type');
+priceInput.placeholder = minPriceTypeHousing[typeSelect.value];
+typeSelect.addEventListener('change', () => {
+  minPriceValue = minPriceTypeHousing[typeSelect.value];
+  priceInput.placeholder = minPriceTypeHousing[typeSelect.value];
+});
+
+// Валидация поля «Время заезда-выезда».
+
+const timeinSelect = document.querySelector('#timein');
+const timeoutSelect = document.querySelector('#timeout');
+
+timeinSelect.addEventListener('change', () => {
+  timeoutSelect.value = timeinSelect.value;
+
+});
+
+timeoutSelect.addEventListener('change', () => {
+  timeinSelect.value = timeoutSelect.value;
+});
+
