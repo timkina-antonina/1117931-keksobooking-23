@@ -81,17 +81,14 @@ const buttonFormSubmit = document.querySelector('.ad-form__submit');
 const roomNumberSelect = document.querySelector('#room_number');
 const capacitySelect = document.querySelector('#capacity');
 buttonFormSubmit.addEventListener('click', () => {
+  capacitySelect.setCustomValidity('');
   if (Number(roomNumberSelect.value) < 100) {
     if (Number(capacitySelect.value) > Number(roomNumberSelect.value) || capacitySelect.value === '0') {
       capacitySelect.setCustomValidity('Количество гостей не должно превышать количество комнат');
-    } else {
-      capacitySelect.setCustomValidity('');
     }
   } else {
     if (capacitySelect.value !== '0') {
       capacitySelect.setCustomValidity('100 комнат не для гостей');
-    } else {
-      capacitySelect.setCustomValidity('');
     }
   }
 
@@ -101,24 +98,10 @@ buttonFormSubmit.addEventListener('click', () => {
 // Валидация поля «Тип жилья»
 
 const typeSelect = document.querySelector('#type');
+priceInput.placeholder = minPriceTypeHousing[typeSelect.value];
 typeSelect.addEventListener('change', () => {
-  switch (typeSelect.value) {
-    case 'bungalow':
-      minPriceValue = minPriceTypeHousing.bungalow;
-      break;
-    case 'flat':
-      minPriceValue = minPriceTypeHousing.flat;
-      break;
-    case 'hotel':
-      minPriceValue = minPriceTypeHousing.hotel;
-      break;
-    case 'house':
-      minPriceValue = minPriceTypeHousing.house;
-      break;
-    case 'palace':
-      minPriceValue = minPriceTypeHousing.palace;
-      break;
-  }
+  minPriceValue = minPriceTypeHousing[typeSelect.value];
+  priceInput.placeholder = minPriceTypeHousing[typeSelect.value];
 });
 
 // Валидация поля «Время заезда-выезда».
