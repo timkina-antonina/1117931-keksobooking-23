@@ -8,7 +8,6 @@ const templateCard = document.querySelector('#card')
 // находим куда вставлять
 const map = document.querySelector('#map-canvas');
 const similarAnnouncement = announcement;
-// const similarAnnouncementFragment = document.createDocumentFragment();
 const typeHousing = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -115,10 +114,6 @@ function drawCard(offer, author) {
   return cardElement;
 }
 
-// similarAnnouncement.forEach(({author, offer}) => {
-// const cardElement = drawCard(offer, author);
-// similarAnnouncementFragment.appendChild(cardElement);
-// });
-
-// map.appendChild(similarAnnouncementFragment);
-map.appendChild(drawCard(similarAnnouncement[0].offer, similarAnnouncement[0].author));
+export {
+  drawCard
+};
