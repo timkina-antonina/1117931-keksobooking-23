@@ -6,8 +6,6 @@ const templateCard = document.querySelector('#card')
   .querySelector('.popup');
 
 // находим куда вставлять
-const map = document.querySelector('#map-canvas');
-const similarAnnouncement = announcement;
 const typeHousing = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
