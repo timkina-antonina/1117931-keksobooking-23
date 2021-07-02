@@ -1,5 +1,3 @@
-import {announcement} from './object.js';
-
 // находим шаблон для объявления #card
 const templateCard = document.querySelector('#card')
   .content
