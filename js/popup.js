@@ -5,7 +5,6 @@ const templateCard = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-// находим куда вставлять
 const typeHousing = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
