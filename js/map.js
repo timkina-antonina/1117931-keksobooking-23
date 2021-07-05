@@ -5,13 +5,25 @@ import {drawCard} from './popup.js';
 const LAT_CENTRE = 35.68950;
 const LNG_CENTRE = 139.69171;
 
+const regularIcon = {
+  iconUrl: 'img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+};
+
+const mainIcon = {
+  iconUrl: 'img/main-pin.svg',
+  iconSize: [52, 52],
+  iconAnchor: [26, 52],
+};
+
 const map = L.map('map-canvas')
   .on('load', () => {
     makeFormState(false);
   })
   .setView({
-    lat: 35.6895,
-    lng: 139.69171,
+    lat: LAT_CENTRE,
+    lng: LNG_CENTRE,
   }, 12);
 
 L.tileLayer(
@@ -23,11 +35,7 @@ L.tileLayer(
 
 // regularPinIcon
 
-const regularPinIcon = L.icon({
-  iconUrl: 'img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
-});
+const regularPinIcon = L.icon(regularIcon);
 
 announcement.forEach(({location, offer, author}) => {
   const lat = location.lat;
@@ -49,11 +57,7 @@ announcement.forEach(({location, offer, author}) => {
 
 // mainPinIcon
 
-const mainPinIcon = L.icon({
-  iconUrl: 'img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
-});
+const mainPinIcon = L.icon(mainIcon);
 
 const mainPinMarker = L.marker(
   {
