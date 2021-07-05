@@ -35,7 +35,7 @@ function makeFormState(isDisabled) {
   });
 }
 
-makeFormState(false);
+makeFormState(true);
 
 // Валидация поля "Заголовок объявления"
 
@@ -117,3 +117,6 @@ timeoutSelect.addEventListener('change', () => {
   timeinSelect.value = timeoutSelect.value;
 });
 
+export {
+  makeFormState
+};
