@@ -6,6 +6,6 @@ fetch('https://23.javascript.pages.academy/keksobooking/data')
   .then((announcements) => {
     drawPinMarkers(announcements);
   })
-  .catch((err) => {
+  .catch(() => {
     showAlert('Не удалось получить данные', 'red');
-  })
+  });

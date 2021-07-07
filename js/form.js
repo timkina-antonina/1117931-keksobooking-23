@@ -123,7 +123,6 @@ timeoutSelect.addEventListener('change', () => {
 // Сброс формы в исходное состояние
 function resetForm() {
   adForm.reset();
-  console.log('Почистили');
 }
 
 // Сброс формы по кнопке "Очистить"
@@ -135,33 +134,33 @@ adFormReset.addEventListener('click', () => {
 
 //Отправка формы
 // const setUserFormSubmit = (onSuccess) => {
-  adForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
 
-    const formData = new FormData(evt.target);
+  const formData = new FormData(evt.target);
 
-    fetch(
-      'https://23.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    )
-    .then((response) => {
-      if (response.ok) {
-        showAlert('Объявление успешно опубликовано.', 'green');
-        resetForm();
-        // onSuccess();
-      } else {
-        showAlert('Не удалось опубликовать объявление. Попробуйте ещё раз', 'red');
-        console.log('Ошибка1');
-      }
-    })
-    .catch(() => {
+  fetch(
+    'https://23.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body: formData,
+    },
+  )
+  .then((response) => {
+    if (response.ok) {
+      showAlert('Объявление успешно опубликовано.', 'green');
+      resetForm();
+      // onSuccess();
+    } else {
       showAlert('Не удалось опубликовать объявление. Попробуйте ещё раз', 'red');
-      console.log('Ошибка12');
-    });
+      console.log('Ошибка1');
+    }
+  })
+  .catch(() => {
+    showAlert('Не удалось опубликовать объявление. Попробуйте ещё раз', 'red');
+    console.log('Ошибка12');
   });
+});
 // };
 
 export {
