@@ -54,7 +54,7 @@ function drawPinMarkers(arr) {
       .addTo(map)
       .bindPopup(drawCard(offer, author));
   });
-};
+}
 
 // mainPinIcon
 
