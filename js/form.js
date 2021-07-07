@@ -146,25 +146,23 @@ adForm.addEventListener('submit', (evt) => {
       body: formData,
     },
   )
-  .then((response) => {
-    if (response.ok) {
-      showAlert('Объявление успешно опубликовано.', 'green');
-      resetForm();
+    .then((response) => {
+      if (response.ok) {
+        showAlert('Объявление успешно опубликовано.', 'green');
+        resetForm();
       // onSuccess();
-    } else {
+      } else {
+        showAlert('Не удалось опубликовать объявление. Попробуйте ещё раз', 'red');
+      }
+    })
+    .catch(() => {
       showAlert('Не удалось опубликовать объявление. Попробуйте ещё раз', 'red');
-      console.log('Ошибка1');
-    }
-  })
-  .catch(() => {
-    showAlert('Не удалось опубликовать объявление. Попробуйте ещё раз', 'red');
-    console.log('Ошибка12');
-  });
+    });
 });
 // };
 
 export {
-  makeFormState,
+  makeFormState
   // setUserFormSubmit
 };
 
