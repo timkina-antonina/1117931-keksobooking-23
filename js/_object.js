@@ -56,6 +56,7 @@ const announcement = new Array(ANNOUNCEMENT_COUNT).fill(null).map((it, num) => {
     location: location,
   };
 });
+console.log(announcement);
 
 export {
   announcement

@@ -1,5 +1,4 @@
 import {makeFormState} from './form.js';
-import {announcement} from './object.js';
 import {drawCard} from './popup.js';
 
 const LAT_CENTRE = 35.68950;
@@ -37,23 +36,25 @@ L.tileLayer(
 
 const regularPinIcon = L.icon(regularIcon);
 
-announcement.forEach(({location, offer, author}) => {
-  const lat = location.lat;
-  const lng = location.lng;
-  const regularPinMarker = L.marker(
-    {
-      lat: lat,
-      lng: lng,
-    },
-    {
-      icon: regularPinIcon,
-    },
-  );
+function drawPinMarkers(arr) {
+  arr.forEach(({location, offer, author}) => {
+    const lat = location.lat;
+    const lng = location.lng;
+    const regularPinMarker = L.marker(
+      {
+        lat: lat,
+        lng: lng,
+      },
+      {
+        icon: regularPinIcon,
+      },
+    );
 
-  regularPinMarker
-    .addTo(map)
-    .bindPopup(drawCard(offer, author));
-});
+    regularPinMarker
+      .addTo(map)
+      .bindPopup(drawCard(offer, author));
+  });
+};
 
 // mainPinIcon
 
@@ -88,3 +89,7 @@ mainPinMarker.on('moveend', (evt) => {
   const lng = evt.target.getLatLng().lng.toFixed(5);
   addressInput.value =`${lat}, ${lng}`;
 });
+
+export {
+  drawPinMarkers
+};

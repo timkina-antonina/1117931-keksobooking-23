@@ -102,7 +102,7 @@ function drawCard(offer, author) {
 
   // popup__avatar
   if (author) {
-    cardElement.querySelector('.popup__avatar').src = author;
+    cardElement.querySelector('.popup__avatar').src = author.avatar;
   } else {
     cardElement.querySelector('.popup__avatar').remove();
   }

@@ -1,3 +1,5 @@
+import {showAlert} from './util.js';
+
 const MAX_PRICE_VALUE = 1000000;
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -117,6 +119,53 @@ timeoutSelect.addEventListener('change', () => {
   timeinSelect.value = timeoutSelect.value;
 });
 
+
+// Сброс формы в исходное состояние
+function resetForm() {
+  adForm.reset();
+  console.log('Почистили');
+}
+
+// Сброс формы по кнопке "Очистить"
+const adFormReset = document.querySelector('.ad-form__reset');
+
+adFormReset.addEventListener('click', () => {
+  resetForm();
+});
+
+//Отправка формы
+// const setUserFormSubmit = (onSuccess) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://23.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    )
+    .then((response) => {
+      if (response.ok) {
+        showAlert('Объявление успешно опубликовано.', 'green');
+        resetForm();
+        // onSuccess();
+      } else {
+        showAlert('Не удалось опубликовать объявление. Попробуйте ещё раз', 'red');
+        console.log('Ошибка1');
+      }
+    })
+    .catch(() => {
+      showAlert('Не удалось опубликовать объявление. Попробуйте ещё раз', 'red');
+      console.log('Ошибка12');
+    });
+  });
+// };
+
 export {
-  makeFormState
+  makeFormState,
+  // setUserFormSubmit
 };
+
