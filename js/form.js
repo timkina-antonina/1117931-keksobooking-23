@@ -1,4 +1,7 @@
 import {showAlert} from './util.js';
+import {resetMarker} from './map.js';
+import {showModal} from './modal.js';
+import {sendData} from './api.js';
 
 const MAX_PRICE_VALUE = 1000000;
 const MIN_TITLE_LENGTH = 30;
@@ -10,6 +13,8 @@ const adFormElement = adForm.querySelectorAll('.ad-form__element');
 const filtersForm = document.querySelector('.map__filters');
 const mapFeatures = filtersForm.querySelector('.map__features');
 const mapFilter = filtersForm.querySelectorAll('.map__filter');
+const body = document.querySelector('body');
+const main = document.querySelector('main');
 
 const minPriceTypeHousing = {
   flat: 1000,
@@ -119,50 +124,31 @@ timeoutSelect.addEventListener('change', () => {
   timeinSelect.value = timeoutSelect.value;
 });
 
-
-// Сброс формы в исходное состояние
-function resetForm() {
-  adForm.reset();
-}
-
-// Сброс формы по кнопке "Очистить"
-const adFormReset = document.querySelector('.ad-form__reset');
-
-adFormReset.addEventListener('click', () => {
-  resetForm();
-});
-
-//Отправка формы
-// const setUserFormSubmit = (onSuccess) => {
+//Отправка формы на сервер
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const formData = new FormData(evt.target);
 
-  fetch(
-    'https://23.javascript.pages.academy/keksobooking',
-    {
-      method: 'POST',
-      body: formData,
-    },
-  )
-    .then((response) => {
-      if (response.ok) {
-        showAlert('Объявление успешно опубликовано.', 'green');
-        resetForm();
-      // onSuccess();
-      } else {
-        showAlert('Не удалось опубликовать объявление. Попробуйте ещё раз', 'red');
-      }
-    })
-    .catch(() => {
-      showAlert('Не удалось опубликовать объявление. Попробуйте ещё раз', 'red');
-    });
+  sendData(
+    formData, 
+    () => {
+    body.insertBefore(showModal('success'), main);
+      adForm.reset();
+      resetMarker();
+    }, 
+    () => {
+      body.insertBefore(showModal('error'), main);
+    }, 
+    showAlert);
 });
-// };
+
+adForm.addEventListener('reset', () => {
+  setTimeout(() => {
+    resetMarker();
+  });
+});
 
 export {
   makeFormState
-  // setUserFormSubmit
 };
-

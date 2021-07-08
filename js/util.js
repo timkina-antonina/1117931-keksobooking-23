@@ -1,6 +1,6 @@
 const ALERT_SHOW_TIME = 5000;
 
-const showAlert = (message, color) => {
+const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
   alertContainer.style.position = 'absolute';
@@ -11,7 +11,7 @@ const showAlert = (message, color) => {
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.сolor = 'white';
-  alertContainer.style.backgroundColor = color;
+  alertContainer.style.backgroundColor = 'red';
 
   alertContainer.textContent = message;
 
