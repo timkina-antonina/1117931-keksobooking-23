@@ -132,7 +132,7 @@ adForm.addEventListener('submit', (evt) => {
 
   sendData(
     formData, () => {
-    body.insertBefore(showModal('success'), main);
+      body.insertBefore(showModal('success'), main);
       adForm.reset();
       resetMarker();
     }, () => {

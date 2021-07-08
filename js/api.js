@@ -8,7 +8,7 @@ const getData = (onSuccess, onFail) => {
     .catch(() => {
       onFail('Не удалось получить данные');
     });
-  };
+};
 
 // Отправка данных
 const sendData = (body, onSuccess, onError, onFail) => {
