@@ -131,16 +131,13 @@ adForm.addEventListener('submit', (evt) => {
   const formData = new FormData(evt.target);
 
   sendData(
-    formData, 
-    () => {
+    formData, () => {
     body.insertBefore(showModal('success'), main);
       adForm.reset();
       resetMarker();
-    }, 
-    () => {
+    }, () => {
       body.insertBefore(showModal('error'), main);
-    }, 
-    showAlert);
+    }, showAlert);
 });
 
 adForm.addEventListener('reset', () => {
