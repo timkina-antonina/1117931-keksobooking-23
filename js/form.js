@@ -1,4 +1,3 @@
-import {showAlert} from './util.js';
 import {resetMarker} from './map.js';
 import {showModal} from './modal.js';
 import {sendData} from './api.js';
