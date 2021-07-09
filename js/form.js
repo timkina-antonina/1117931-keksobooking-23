@@ -137,7 +137,7 @@ adForm.addEventListener('submit', (evt) => {
       resetMarker();
     }, () => {
       body.insertBefore(showModal('error'), main);
-    }, showAlert);
+    });
 });
 
 adForm.addEventListener('reset', () => {

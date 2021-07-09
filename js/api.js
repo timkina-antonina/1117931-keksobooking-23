@@ -11,7 +11,7 @@ const getData = (onSuccess, onFail) => {
 };
 
 // Отправка данных
-const sendData = (body, onSuccess, onError, onFail) => {
+const sendData = (body, onSuccess, onError) => {
   fetch(
     'https://23.javascript.pages.academy/keksobooking',
     {
@@ -27,7 +27,7 @@ const sendData = (body, onSuccess, onError, onFail) => {
       }
     })
     .catch(() => {
-      onFail('Не удалось опубликовать объявление. Попробуйте ещё раз');
+      onError();
     });
 };
 
