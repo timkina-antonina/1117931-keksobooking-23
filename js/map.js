@@ -1,6 +1,7 @@
 import {makeFormState} from './form.js';
-import {announcement} from './object.js';
 import {drawCard} from './popup.js';
+import {showAlert} from './util.js';
+import {getData} from './api.js';
 
 const LAT_CENTRE = 35.68950;
 const LNG_CENTRE = 139.69171;
@@ -17,6 +18,7 @@ const mainIcon = {
   iconAnchor: [26, 52],
 };
 
+//когда карта загрузилась
 const map = L.map('map-canvas')
   .on('load', () => {
     makeFormState(false);
@@ -24,7 +26,7 @@ const map = L.map('map-canvas')
   .setView({
     lat: LAT_CENTRE,
     lng: LNG_CENTRE,
-  }, 12);
+  }, 13);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -34,29 +36,31 @@ L.tileLayer(
 ).addTo(map);
 
 // regularPinIcon
-
 const regularPinIcon = L.icon(regularIcon);
 
-announcement.forEach(({location, offer, author}) => {
-  const lat = location.lat;
-  const lng = location.lng;
-  const regularPinMarker = L.marker(
-    {
-      lat: lat,
-      lng: lng,
-    },
-    {
-      icon: regularPinIcon,
-    },
-  );
+function drawPinMarkers(arr) {
+  arr.forEach(({location, offer, author}) => {
+    const lat = location.lat;
+    const lng = location.lng;
+    const regularPinMarker = L.marker(
+      {
+        lat: lat,
+        lng: lng,
+      },
+      {
+        icon: regularPinIcon,
+      },
+    );
 
-  regularPinMarker
-    .addTo(map)
-    .bindPopup(drawCard(offer, author));
-});
+    regularPinMarker
+      .addTo(map)
+      .bindPopup(drawCard(offer, author));
+  });
+}
 
-// mainPinIcon
+getData(drawPinMarkers, showAlert);
 
+// Отрисовываем mainPinIcon
 const mainPinIcon = L.icon(mainIcon);
 
 const mainPinMarker = L.marker(
@@ -72,19 +76,27 @@ const mainPinMarker = L.marker(
 
 mainPinMarker.addTo(map);
 
+// Устанавливаем главный маркер в начальное положение
 const form = document.querySelector('.ad-form');
-form.addEventListener('submit', () => {
+const addressInput = form.querySelector('#address');
+
+const resetMarker = () => {
   mainPinMarker.setLatLng({
     lat: LAT_CENTRE,
     lng: LNG_CENTRE,
   });
-});
+  addressInput.value = `${LAT_CENTRE}, ${LNG_CENTRE}`;
+};
 
-const addressInput = form.querySelector('#address');
-addressInput.value =`${LAT_CENTRE}, ${LNG_CENTRE}`;
+resetMarker();
 
 mainPinMarker.on('moveend', (evt) => {
   const lat = evt.target.getLatLng().lat.toFixed(5);
   const lng = evt.target.getLatLng().lng.toFixed(5);
   addressInput.value =`${lat}, ${lng}`;
 });
+
+export {
+  drawPinMarkers,
+  resetMarker
+};
