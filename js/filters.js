@@ -16,7 +16,7 @@ const filterConditionerInput = filterHousingFeatures.querySelector('#filter-cond
 function filter(arr, count) {
   if (filterHousingTypeSelect.value !== 'any') {
     arr = arr.filter(({offer}) => {
-      return offer.type === filterHousingTypeSelect.value;
+      offer.type === filterHousingTypeSelect.value;
     });
   }
   if (filterHousingPriceSelect.value !== 'any') {
@@ -33,7 +33,7 @@ function filter(arr, count) {
   }
   if (filterHousingRoomsSelect.value !== 'any') {
     arr = arr.filter(({offer}) => {
-      return offer.rooms === parseInt(filterHousingRoomsSelect.value);
+      offer.rooms === parseInt(filterHousingRoomsSelect.value);
     });
   }
   if (filterHousingGuestsSelect.value !== 'any') {
@@ -46,11 +46,11 @@ function filter(arr, count) {
     });
   }
   // записываем значения чекнутых фильтров в массив checkedFeatures
-  const checkedFeatures = [...filterHousingFeatures.querySelectorAll(':checked')].map(arrItem => arrItem.value);
+  const checkedFeatures = [...filterHousingFeatures.querySelectorAll(':checked')].map((arrItem) => arrItem.value);
   if (checkedFeatures.length !== 0) {
     arr = arr.filter(({offer}) => {
       if (offer.features !== undefined) {
-        return checkedFeatures.every(arrItem => offer.features.includes(arrItem));
+        return checkedFeatures.every((arrItem) => offer.features.includes(arrItem));
       }
     });
   }
