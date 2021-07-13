@@ -33,13 +33,13 @@ function filter(arr, count) {
   }
   if (filterHousingRoomsSelect.value !== 'any') {
     arr = arr.filter(({offer}) => {
-      offer.rooms === parseInt(filterHousingRoomsSelect.value);
+      offer.rooms === parseInt(filterHousingRoomsSelect.value, 10);
     });
   }
   if (filterHousingGuestsSelect.value !== 'any') {
     arr = arr.filter(({offer}) => {
       if (filterHousingGuestsSelect.value !== '0') {
-        return offer.guests === parseInt(filterHousingGuestsSelect.value);
+        return offer.guests === parseInt(filterHousingGuestsSelect.value, 10);
       } else {
         return offer.guests >= 3;
       }
