@@ -8,7 +8,7 @@ import {debounce} from './utils/debounce.js';
 
 let loadedItems = [];
 getData((items) => {
-    loadedItems = items;
-    drawPinMarkers(loadedItems);
+  loadedItems = items;
+  drawPinMarkers(loadedItems);
 }, showAlert);
 setFilterChange(debounce(() => drawPinMarkers(loadedItems), 500));

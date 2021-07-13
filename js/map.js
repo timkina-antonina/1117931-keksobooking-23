@@ -41,7 +41,7 @@ const regularPinIcon = L.icon(regularIcon);
 const markerGroup = L.layerGroup().addTo(map);
 
 function drawPinMarkers(arr) {
-    markerGroup.clearLayers();
+  markerGroup.clearLayers();
   const announcements = filter(arr, ANNOUNCEMENTS_COUNT);
   announcements.forEach(({location, offer, author}) => {
     const lat = location.lat;
