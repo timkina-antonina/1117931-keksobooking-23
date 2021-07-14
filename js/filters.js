@@ -10,7 +10,7 @@ const filterHousingFeatures = document.querySelector('#housing-features');
 
 //функция филтрации
 function isMatchHousingType(offer) {
-  return filterHousingTypeSelect.value === NOT_FILTERED 
+  return filterHousingTypeSelect.value === NOT_FILTERED
     || offer.type === filterHousingTypeSelect.value;
 }
 
@@ -33,7 +33,7 @@ function isMatchPrice(offer) {
 
 function isMatchGuests(offer) {
   if (filterHousingGuestsSelect.value === NOT_FILTERED) {
-      return true;
+    return true;
   }
 
   if (filterHousingGuestsSelect.value !== '0') {
