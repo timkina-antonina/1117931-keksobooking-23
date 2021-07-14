@@ -8,17 +8,10 @@ const filterHousingRoomsSelect = document.querySelector('#housing-rooms');
 const filterHousingGuestsSelect = document.querySelector('#housing-guests');
 const filterHousingFeatures = document.querySelector('#housing-features');
 
-// const filterWifiInput = filterHousingFeatures.querySelector('#filter-wifi');
-// const filterDishwasherInput = filterHousingFeatures.querySelector('#filter-dishwasher');
-// const filterParkingInput = filterHousingFeatures.querySelector('#filter-parking');
-// const filterWasherInput = filterHousingFeatures.querySelector('#filter-washer');
-// const filterElevatorInput = filterHousingFeatures.querySelector('#filter-elevator');
-// const filterConditionerInput = filterHousingFeatures.querySelector('#filter-conditioner');
-
-
 //функция филтрации
 function isMatchHousingType(offer) {
-  return filterHousingTypeSelect.value === NOT_FILTERED || offer.type === filterHousingTypeSelect.value;
+  return filterHousingTypeSelect.value === NOT_FILTERED 
+    || offer.type === filterHousingTypeSelect.value;
 }
 
 function isMatchRooms(offer) {
