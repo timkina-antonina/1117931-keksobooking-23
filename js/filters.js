@@ -8,74 +8,85 @@ const filterHousingRoomsSelect = document.querySelector('#housing-rooms');
 const filterHousingGuestsSelect = document.querySelector('#housing-guests');
 const filterHousingFeatures = document.querySelector('#housing-features');
 
-const filterWifiInput = filterHousingFeatures.querySelector('#filter-wifi');
-const filterDishwasherInput = filterHousingFeatures.querySelector('#filter-dishwasher');
-const filterParkingInput = filterHousingFeatures.querySelector('#filter-parking');
-const filterWasherInput = filterHousingFeatures.querySelector('#filter-washer');
-const filterElevatorInput = filterHousingFeatures.querySelector('#filter-elevator');
-const filterConditionerInput = filterHousingFeatures.querySelector('#filter-conditioner');
+// const filterWifiInput = filterHousingFeatures.querySelector('#filter-wifi');
+// const filterDishwasherInput = filterHousingFeatures.querySelector('#filter-dishwasher');
+// const filterParkingInput = filterHousingFeatures.querySelector('#filter-parking');
+// const filterWasherInput = filterHousingFeatures.querySelector('#filter-washer');
+// const filterElevatorInput = filterHousingFeatures.querySelector('#filter-elevator');
+// const filterConditionerInput = filterHousingFeatures.querySelector('#filter-conditioner');
 
 
 //функция филтрации
-function filter(arr, count) {
-  if (filterHousingTypeSelect.value !== NOT_FILTERED) {
-    arr = arr.filter(({offer}) => {
-        return offer.type === filterHousingTypeSelect.value;
-    });
+function isMatchHousingType(offer) {
+  return filterHousingTypeSelect.value === NOT_FILTERED || offer.type === filterHousingTypeSelect.value;
+}
+
+function isMatchRooms(offer) {
+  return filterHousingRoomsSelect.value === NOT_FILTERED
+    || offer.rooms === parseInt(filterHousingRoomsSelect.value, 10);
+}
+
+function isMatchPrice(offer) {
+  switch (filterHousingPriceSelect.value) {
+    case 'low':
+      return offer.price < MIN_PRICE;
+    case 'middle':
+      return offer.price >= MIN_PRICE && offer.price < MAX_PRICE;
+    case 'high':
+      return offer.price >= MAX_PRICE;
   }
-  if (filterHousingPriceSelect.value !== NOT_FILTERED) {
-    arr = arr.filter(({offer}) => {
-      switch (filterHousingPriceSelect.value) {
-        case 'low':
-          return offer.price < MIN_PRICE;
-        case 'middle':
-          return offer.price >= MIN_PRICE && offer.price < MAX_PRICE;
-        case 'high':
-          return offer.price >= MAX_PRICE;
-      }
-    });
+  return true;
+}
+
+function isMatchGuests(offer) {
+  if (filterHousingGuestsSelect.value === NOT_FILTERED) {
+      return true;
   }
-  if (filterHousingRoomsSelect.value !== NOT_FILTERED) {
-    arr = arr.filter(({offer}) => {
-        return offer.rooms === parseInt(filterHousingRoomsSelect.value, 10);
-    });
+
+  if (filterHousingGuestsSelect.value !== '0') {
+    return offer.guests === parseInt(filterHousingGuestsSelect.value, 10);
+  } else {
+    return offer.guests >= 3;
   }
-  if (filterHousingGuestsSelect.value !== NOT_FILTERED) {
-    arr = arr.filter(({offer}) => {
-      if (filterHousingGuestsSelect.value !== '0') {
-        return offer.guests === parseInt(filterHousingGuestsSelect.value, 10);
-      } else {
-        return offer.guests >= 3;
-      }
-    });
-  }
+}
+
+function isMatchFeatures(offer) {
   // записываем значения чекнутых фильтров в массив checkedFeatures
   const checkedFeatures = [...filterHousingFeatures.querySelectorAll(':checked')].map((arrItem) => arrItem.value);
-  if (checkedFeatures.length !== 0) {
-    arr = arr.filter(({offer}) => {
-      if (offer.features !== undefined) {
-        return checkedFeatures.every((arrItem) => offer.features.includes(arrItem));
-      }
-    });
+  if (checkedFeatures.length === 0) {
+    return true;
   }
+
+  if (!offer.features) {
+    return false;
+  }
+  return checkedFeatures.every((arrItem) => offer.features.includes(arrItem));
+}
+
+const filtersFuncs = [isMatchHousingType, isMatchPrice, isMatchRooms, isMatchGuests, isMatchFeatures];
+
+function filterOffer(offer) {
+  return filtersFuncs.every((filterFunc) => filterFunc(offer));
+}
+
+function filter(arr, count) {
+  arr = arr.filter(({offer}) => filterOffer(offer));
   return arr.slice(0, count);
 }
 
 //функция обновления по событию установки фильтров
+const filterForm = document.querySelector('.map__filters');
 const setFilterChange = (cb) => {
-  filterHousingTypeSelect.addEventListener('change', cb);
-  filterHousingPriceSelect.addEventListener('change', cb);
-  filterHousingRoomsSelect.addEventListener('change', cb);
-  filterHousingGuestsSelect.addEventListener('change', cb);
-  filterWifiInput.addEventListener('change', cb);
-  filterDishwasherInput.addEventListener('change', cb);
-  filterParkingInput.addEventListener('change', cb);
-  filterWasherInput.addEventListener('change', cb);
-  filterElevatorInput.addEventListener('change', cb);
-  filterConditionerInput.addEventListener('change', cb);
+  filterForm.addEventListener('change', cb);
+  filterForm.addEventListener('reset', cb);
+};
+
+const resetFilters = function() {
+  filterForm.reset();
 };
 
 export {
   filter,
-  setFilterChange
+  setFilterChange,
+  resetFilters
 };
