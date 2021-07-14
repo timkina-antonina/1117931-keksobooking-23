@@ -1,3 +1,7 @@
+const MIN_PRICE = 10000;
+const MAX_PRICE = 50000;
+const NOT_FILTERED = 'any';
+
 const filterHousingTypeSelect = document.querySelector('#housing-type');
 const filterHousingPriceSelect = document.querySelector('#housing-price');
 const filterHousingRoomsSelect = document.querySelector('#housing-rooms');
@@ -14,29 +18,29 @@ const filterConditionerInput = filterHousingFeatures.querySelector('#filter-cond
 
 //функция филтрации
 function filter(arr, count) {
-  if (filterHousingTypeSelect.value !== 'any') {
+  if (filterHousingTypeSelect.value !== NOT_FILTERED) {
     arr = arr.filter(({offer}) => {
-      offer.type === filterHousingTypeSelect.value;
+        return offer.type === filterHousingTypeSelect.value;
     });
   }
-  if (filterHousingPriceSelect.value !== 'any') {
+  if (filterHousingPriceSelect.value !== NOT_FILTERED) {
     arr = arr.filter(({offer}) => {
       switch (filterHousingPriceSelect.value) {
         case 'low':
-          return offer.price < 10000;
+          return offer.price < MIN_PRICE;
         case 'middle':
-          return offer.price >= 10000 && offer.price < 50000 ;
+          return offer.price >= MIN_PRICE && offer.price < MAX_PRICE;
         case 'high':
-          return offer.price >= 50000;
+          return offer.price >= MAX_PRICE;
       }
     });
   }
-  if (filterHousingRoomsSelect.value !== 'any') {
+  if (filterHousingRoomsSelect.value !== NOT_FILTERED) {
     arr = arr.filter(({offer}) => {
-      offer.rooms === parseInt(filterHousingRoomsSelect.value, 10);
+        return offer.rooms === parseInt(filterHousingRoomsSelect.value, 10);
     });
   }
-  if (filterHousingGuestsSelect.value !== 'any') {
+  if (filterHousingGuestsSelect.value !== NOT_FILTERED) {
     arr = arr.filter(({offer}) => {
       if (filterHousingGuestsSelect.value !== '0') {
         return offer.guests === parseInt(filterHousingGuestsSelect.value, 10);
