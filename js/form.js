@@ -1,6 +1,7 @@
 import {resetMarker} from './map.js';
 import {showModal} from './modal.js';
 import {sendData} from './api.js';
+import {resetFilters} from './filters.js';
 
 const MAX_PRICE_VALUE = 1000000;
 const MIN_TITLE_LENGTH = 30;
@@ -134,6 +135,7 @@ adForm.addEventListener('submit', (evt) => {
       body.insertBefore(showModal('success'), main);
       adForm.reset();
       resetMarker();
+      resetFilters();
     }, () => {
       body.insertBefore(showModal('error'), main);
     });
@@ -142,6 +144,7 @@ adForm.addEventListener('submit', (evt) => {
 adForm.addEventListener('reset', () => {
   setTimeout(() => {
     resetMarker();
+    resetFilters();
   });
 });
 
