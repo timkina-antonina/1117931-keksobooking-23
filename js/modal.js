@@ -1,3 +1,7 @@
+function closeModal () {
+  document.removeEventListener('keydown', onModalEscKeydown);
+}
+
 // Функция  отображения обратной связи об отправке формы
 const showModal = (typeMessage) => {
   const templateModal = document.querySelector(`#${typeMessage}`)
@@ -18,10 +22,6 @@ const showModal = (typeMessage) => {
   });
   document.addEventListener('keydown', onModalEscKeydown);
   return modalElement;
-};
-
-function closeModal () {
-  document.removeEventListener('keydown', onModalEscKeydown);
 };
 
 export {
