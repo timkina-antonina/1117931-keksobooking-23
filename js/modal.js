@@ -16,7 +16,6 @@ const showModal = (typeMessage) => {
   modalElement.addEventListener('click', () => {
     modalElement.remove();
   });
-  
   document.addEventListener('keydown', onModalEscKeydown);
   return modalElement;
 };
