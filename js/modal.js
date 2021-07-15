@@ -4,15 +4,19 @@ const showModal = (typeMessage) => {
     .content
     .querySelector(`.${typeMessage}`);
   const modalElement = templateModal.cloneNode(true);
-  modalElement.addEventListener('click', () => {
-    modalElement.remove();
-  });
-  document.addEventListener('keydown', (evt) => {
+
+  const onModalEscKeydown = (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
       modalElement.remove();
+      document.removeEventListener('keydown', onModalEscKeydown);
     }
+  };
+
+  modalElement.addEventListener('click', () => {
+    modalElement.remove();
   });
+  document.addEventListener('keydown', onModalEscKeydown);
   return modalElement;
 };
 
