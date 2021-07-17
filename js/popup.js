@@ -10,11 +10,9 @@ const typeHousing = {
   palace: 'Дворец',
   hotel: 'Отель',
 };
-const printTypeHousing = function (type) {
-  return typeHousing[type];
-};
+const printTypeHousing = (type) => typeHousing[type];
 
-function drawCard(offer, author) {
+const drawCard = (offer, author) => {
   const cardElement = templateCard.cloneNode(true);
 
   // popup__title
@@ -107,7 +105,7 @@ function drawCard(offer, author) {
     cardElement.querySelector('.popup__avatar').remove();
   }
   return cardElement;
-}
+};
 
 export {
   drawCard

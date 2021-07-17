@@ -1,4 +1,3 @@
-import {makeFormState} from './form.js';
 import {drawCard} from './popup.js';
 import {filter} from './filters.js';
 
@@ -11,6 +10,7 @@ const regularIcon = {
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 };
+const regularPinIcon = L.icon(regularIcon);
 
 const mainIcon = {
   iconUrl: 'img/main-pin.svg',
@@ -18,29 +18,44 @@ const mainIcon = {
   iconAnchor: [26, 52],
 };
 
-//когда карта загрузилась
-const map = L.map('map-canvas')
-  .on('load', () => {
-    makeFormState(false);
-  })
-  .setView({
+// Отрисовываем mainPinIcon
+const mainPinIcon = L.icon(mainIcon);
+
+const mainPinMarker = L.marker(
+  {
     lat: LAT_CENTRE,
     lng: LNG_CENTRE,
-  }, 12);
-
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
-).addTo(map);
+  {
+    draggable: true,
+    icon: mainPinIcon,
+  },
+);
+const markerGroup = L.layerGroup();
 
-// regularPinIcon
-const regularPinIcon = L.icon(regularIcon);
+//когда карта загрузилась
+const createMap = (onLoadCallback) => {
+  const map = L.map('map-canvas')
+    .on('load', () => {
+      onLoadCallback();
+    })
+    .setView({
+      lat: LAT_CENTRE,
+      lng: LNG_CENTRE,
+    }, 12);
 
-const markerGroup = L.layerGroup().addTo(map);
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  ).addTo(map);
 
-function drawPinMarkers(arr) {
+  markerGroup.addTo(map);
+  mainPinMarker.addTo(map);
+};
+
+const drawPinMarkers = (arr) => {
   markerGroup.clearLayers();
   const announcements = filter(arr, ANNOUNCEMENTS_COUNT);
   announcements.forEach(({location, offer, author}) => {
@@ -56,27 +71,10 @@ function drawPinMarkers(arr) {
       },
     );
     regularPinMarker
-      // .addTo(map)
       .addTo(markerGroup)
       .bindPopup(drawCard(offer, author));
   });
-}
-
-// Отрисовываем mainPinIcon
-const mainPinIcon = L.icon(mainIcon);
-
-const mainPinMarker = L.marker(
-  {
-    lat: LAT_CENTRE,
-    lng: LNG_CENTRE,
-  },
-  {
-    draggable: true,
-    icon: mainPinIcon,
-  },
-);
-
-mainPinMarker.addTo(map);
+};
 
 // Устанавливаем главный маркер в начальное положение
 const form = document.querySelector('.ad-form');
@@ -100,5 +98,6 @@ mainPinMarker.on('moveend', (evt) => {
 
 export {
   drawPinMarkers,
-  resetMarker
+  resetMarker,
+  createMap
 };

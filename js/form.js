@@ -6,6 +6,7 @@ import {resetFilters} from './filters.js';
 const MAX_PRICE_VALUE = 1000000;
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+const MAX_ROOM_NUMBER = 100;
 
 const adForm = document.querySelector('.ad-form');
 const adFormHeader = adForm.querySelector('.ad-form-header');
@@ -24,7 +25,7 @@ const minPriceTypeHousing = {
   hotel: 3000,
 };
 
-function makeFormState(isDisabled) {
+const makeFormState = (isDisabled) => {
   if (isDisabled) {
     adForm.classList.add('ad-form--disabled');
     filtersForm.classList.add('ad-form--disabled');
@@ -40,7 +41,7 @@ function makeFormState(isDisabled) {
   mapFilter.forEach((element, i) => {
     mapFilter[i].disabled = isDisabled;
   });
-}
+};
 
 makeFormState(true);
 
@@ -88,7 +89,7 @@ const roomNumberSelect = document.querySelector('#room_number');
 const capacitySelect = document.querySelector('#capacity');
 buttonFormSubmit.addEventListener('click', () => {
   capacitySelect.setCustomValidity('');
-  if (Number(roomNumberSelect.value) < 100) {
+  if (Number(roomNumberSelect.value) < MAX_ROOM_NUMBER) {
     if (Number(capacitySelect.value) > Number(roomNumberSelect.value) || capacitySelect.value === '0') {
       capacitySelect.setCustomValidity('Количество гостей не должно превышать количество комнат');
     }

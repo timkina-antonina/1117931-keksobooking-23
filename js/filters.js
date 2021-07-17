@@ -9,17 +9,15 @@ const filterHousingGuestsSelect = document.querySelector('#housing-guests');
 const filterHousingFeatures = document.querySelector('#housing-features');
 
 //функция филтрации
-function isMatchHousingType(offer) {
-  return filterHousingTypeSelect.value === NOT_FILTERED
-    || offer.type === filterHousingTypeSelect.value;
-}
+const isMatchHousingType = (offer) =>
+  filterHousingTypeSelect.value === NOT_FILTERED
+  || offer.type === filterHousingTypeSelect.value;
 
-function isMatchRooms(offer) {
-  return filterHousingRoomsSelect.value === NOT_FILTERED
+const isMatchRooms = (offer) =>
+  filterHousingRoomsSelect.value === NOT_FILTERED
     || offer.rooms === parseInt(filterHousingRoomsSelect.value, 10);
-}
 
-function isMatchPrice(offer) {
+const isMatchPrice = (offer) => {
   switch (filterHousingPriceSelect.value) {
     case 'low':
       return offer.price < MIN_PRICE;
@@ -29,9 +27,9 @@ function isMatchPrice(offer) {
       return offer.price >= MAX_PRICE;
   }
   return true;
-}
+};
 
-function isMatchGuests(offer) {
+const isMatchGuests = (offer) => {
   if (filterHousingGuestsSelect.value === NOT_FILTERED) {
     return true;
   }
@@ -41,9 +39,9 @@ function isMatchGuests(offer) {
   } else {
     return offer.guests >= 3;
   }
-}
+};
 
-function isMatchFeatures(offer) {
+const isMatchFeatures = (offer) => {
   // записываем значения чекнутых фильтров в массив checkedFeatures
   const checkedFeatures = [...filterHousingFeatures.querySelectorAll(':checked')].map((arrItem) => arrItem.value);
   if (checkedFeatures.length === 0) {
@@ -54,18 +52,16 @@ function isMatchFeatures(offer) {
     return false;
   }
   return checkedFeatures.every((arrItem) => offer.features.includes(arrItem));
-}
+};
 
 const filtersFuncs = [isMatchHousingType, isMatchPrice, isMatchRooms, isMatchGuests, isMatchFeatures];
 
-function filterOffer(offer) {
-  return filtersFuncs.every((filterFunc) => filterFunc(offer));
-}
+const filterOffer = (offer) => filtersFuncs.every((filterFunc) => filterFunc(offer));
 
-function filter(arr, count) {
+const filter = (arr, count) => {
   arr = arr.filter(({offer}) => filterOffer(offer));
   return arr.slice(0, count);
-}
+};
 
 //функция обновления по событию установки фильтров
 const filterForm = document.querySelector('.map__filters');
