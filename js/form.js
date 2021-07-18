@@ -28,15 +28,21 @@ const minPriceTypeHousing = {
 const makeFormState = (isDisabled) => {
   if (isDisabled) {
     adForm.classList.add('ad-form--disabled');
-    filtersForm.classList.add('ad-form--disabled');
   } else {
     adForm.classList.remove('ad-form--disabled');
-    filtersForm.classList.remove('ad-form--disabled');
   }
   adFormHeader.disabled = isDisabled;
   adFormElement.forEach((element, i) => {
     adFormElement[i].disabled = isDisabled;
   });
+};
+
+const makeFiltersState = (isDisabled) => {
+  if (isDisabled) {
+    filtersForm.classList.add('ad-form--disabled');
+  } else {
+    filtersForm.classList.remove('ad-form--disabled');
+  }
   mapFeatures.disabled = isDisabled;
   mapFilter.forEach((element, i) => {
     mapFilter[i].disabled = isDisabled;
@@ -44,6 +50,7 @@ const makeFormState = (isDisabled) => {
 };
 
 makeFormState(true);
+makeFiltersState(true);
 
 // Валидация поля "Заголовок объявления"
 
@@ -150,5 +157,6 @@ adForm.addEventListener('reset', () => {
 });
 
 export {
-  makeFormState
+  makeFormState,
+  makeFiltersState
 };
